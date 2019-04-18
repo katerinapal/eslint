@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+import cli from "../lib/cli";
+import configInit from "../lib/config/config-initializer";
+
 /**
  * @fileoverview Main CLI that is run via the eslint command.
  * @author Nicholas C. Zakas
@@ -27,10 +30,7 @@ if (debug) {
 //------------------------------------------------------------------------------
 
 // now we can safely include the other modules that use debug
-const concat = require("concat-stream"),
-    cli = require("../lib/cli"),
-    path = require("path"),
-    fs = require("fs");
+const concat = require("concat-stream"), path = require("path"), fs = require("fs");
 
 //------------------------------------------------------------------------------
 // Execution
@@ -59,8 +59,6 @@ if (useStdIn) {
         process.exitCode = cli.execute(process.argv, text);
     }));
 } else if (init) {
-    const configInit = require("../lib/config/config-initializer");
-
     configInit.initializeConfig(function(err) {
         if (err) {
             process.exitCode = 1;

@@ -14,7 +14,7 @@ const globals = require("globals");
 // Public Interface
 //------------------------------------------------------------------------------
 
-module.exports = {
+export default {
     builtin: globals.es5,
     browser: {
         globals: globals.browser
@@ -104,4 +104,4 @@ module.exports = {
     greasemonkey: {
         globals: globals.greasemonkey
     }
-};
+};;

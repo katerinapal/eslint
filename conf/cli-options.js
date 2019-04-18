@@ -5,7 +5,7 @@
 
 "use strict";
 
-module.exports = {
+export default {
     configFile: null,
     baseConfig: false,
     rulePaths: [],
@@ -26,4 +26,4 @@ module.exports = {
     cacheFile: ".eslintcache",
     fix: false,
     allowInlineConfig: true
-};
+};;
