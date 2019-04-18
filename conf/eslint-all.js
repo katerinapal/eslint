@@ -1,5 +1,21 @@
-import load from "../lib/load-rules";
-import rules from "../lib/rules";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _loadRules = require("../lib/load-rules");
+
+var _loadRules2 = _interopRequireDefault(_loadRules);
+
+var _rules = require("../lib/rules");
+
+var _rules2 = _interopRequireDefault(_rules);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
 /**
  * @fileoverview Config to enable all rules.
  * @author Robert Fletcher
@@ -11,8 +27,8 @@ import rules from "../lib/rules";
 // Helpers
 //------------------------------------------------------------------------------
 
-const enabledRules = Object.keys(load()).reduce((result, ruleId) => {
-    if (!rules.get(ruleId).meta.deprecated) {
+var enabledRules = Object.keys((0, _loadRules2.default)()).reduce(function (result, ruleId) {
+    if (!_rules2.default.get(ruleId).meta.deprecated) {
         result[ruleId] = "error";
     }
     return result;
@@ -22,4 +38,6 @@ const enabledRules = Object.keys(load()).reduce((result, ruleId) => {
 // Public Interface
 //------------------------------------------------------------------------------
 
-export default { rules: enabledRules };;
+exports.default = { rules: enabledRules };
+;
+module.exports = exports.default;

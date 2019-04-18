@@ -8,6 +8,9 @@
 // Requirements
 //------------------------------------------------------------------------------
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 var fs = require("fs"),
     path = require("path"),
     yaml = require("js-yaml");
@@ -22,10 +25,10 @@ var filePath = path.resolve(__dirname, "./default.yml"),
 try {
     config = yaml.safeLoad(fs.readFileSync(filePath, "utf8")) || {};
 } catch (e) {
-    console.error(`Error reading YAML file: ${filePath}`);
-    e.message = `Cannot read config file: ${filePath}\nError: ${e.message}`;
+    console.error("Error reading YAML file: " + filePath);
+    e.message = "Cannot read config file: " + filePath + "\nError: " + e.message;
     throw e;
 }
 
-
-export default config;
+exports.default = config;
+module.exports = exports.default;

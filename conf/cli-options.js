@@ -5,7 +5,10 @@
 
 "use strict";
 
-export default {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
     configFile: null,
     baseConfig: false,
     rulePaths: [],
@@ -16,7 +19,7 @@ export default {
     extensions: [".js"],
     ignore: true,
     ignorePath: null,
-    parser: "",     // must be empty
+    parser: "", // must be empty
     cache: false,
 
     // in order to honor the cacheFile option if specified
@@ -26,4 +29,6 @@ export default {
     cacheFile: ".eslintcache",
     fix: false,
     allowInlineConfig: true
-};;
+};
+;
+module.exports = exports.default;

@@ -1,7 +1,15 @@
 #!/usr/bin/env node
+"use strict";
 
-import cli from "../lib/cli";
-import configInit from "../lib/config/config-initializer";
+var _cli = require("../lib/cli");
+
+var _cli2 = _interopRequireDefault(_cli);
+
+var _configInitializer = require("../lib/config/config-initializer");
+
+var _configInitializer2 = _interopRequireDefault(_configInitializer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @fileoverview Main CLI that is run via the eslint command.
@@ -16,9 +24,9 @@ import configInit from "../lib/config/config-initializer";
 // Helpers
 //------------------------------------------------------------------------------
 
-const useStdIn = (process.argv.indexOf("--stdin") > -1),
-    init = (process.argv.indexOf("--init") > -1),
-    debug = (process.argv.indexOf("--debug") > -1);
+var useStdIn = process.argv.indexOf("--stdin") > -1,
+    init = process.argv.indexOf("--init") > -1,
+    debug = process.argv.indexOf("--debug") > -1;
 
 // must do this initialization *before* other requires in order to work
 if (debug) {
@@ -30,22 +38,24 @@ if (debug) {
 //------------------------------------------------------------------------------
 
 // now we can safely include the other modules that use debug
-const concat = require("concat-stream"), path = require("path"), fs = require("fs");
+var concat = require("concat-stream"),
+    path = require("path"),
+    fs = require("fs");
 
 //------------------------------------------------------------------------------
 // Execution
 //------------------------------------------------------------------------------
 
-process.on("uncaughtException", function(err) {
+process.on("uncaughtException", function (err) {
 
     // lazy load
-    const lodash = require("lodash");
+    var lodash = require("lodash");
 
     if (typeof err.messageTemplate === "string" && err.messageTemplate.length > 0) {
-        const template = lodash.template(fs.readFileSync(path.resolve(__dirname, `../messages/${err.messageTemplate}.txt`), "utf-8"));
+        var template = lodash.template(fs.readFileSync(path.resolve(__dirname, "../messages/" + err.messageTemplate + ".txt"), "utf-8"));
 
         console.log("\nOops! Something went wrong! :(");
-        console.log(`\n${template(err.messageData || {})}`);
+        console.log("\n" + template(err.messageData || {}));
     } else {
         console.log(err.message);
         console.log(err.stack);
@@ -55,11 +65,11 @@ process.on("uncaughtException", function(err) {
 });
 
 if (useStdIn) {
-    process.stdin.pipe(concat({ encoding: "string" }, function(text) {
-        process.exitCode = cli.execute(process.argv, text);
+    process.stdin.pipe(concat({ encoding: "string" }, function (text) {
+        process.exitCode = _cli2.default.execute(process.argv, text);
     }));
 } else if (init) {
-    configInit.initializeConfig(function(err) {
+    _configInitializer2.default.initializeConfig(function (err) {
         if (err) {
             process.exitCode = 1;
             console.error(err.message);
@@ -69,5 +79,5 @@ if (useStdIn) {
         }
     });
 } else {
-    process.exitCode = cli.execute(process.argv);
+    process.exitCode = _cli2.default.execute(process.argv);
 }

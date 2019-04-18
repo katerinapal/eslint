@@ -8,13 +8,16 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const globals = require("globals");
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var globals = require("globals");
 
 //------------------------------------------------------------------------------
 // Public Interface
 //------------------------------------------------------------------------------
 
-export default {
+exports.default = {
     builtin: globals.es5,
     browser: {
         globals: globals.browser
@@ -104,4 +107,6 @@ export default {
     greasemonkey: {
         globals: globals.greasemonkey
     }
-};;
+};
+;
+module.exports = exports.default;
